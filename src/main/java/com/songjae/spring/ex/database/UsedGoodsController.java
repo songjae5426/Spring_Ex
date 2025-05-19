@@ -1,0 +1,14 @@
+package com.songjae.spring.ex.database;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+// request, response 처리 기능
+@Controller
+public class UsedGoodsController {
+	// 중고 게시글 모든 정보를 response에 담는 페이지
+	@RequestMapping("/db/usedgoods/list")
+	public userdGoodsList(){
+		// 중고 게시글 정보 얻어 오기
+	}
+}
