@@ -1,4 +1,4 @@
-package com.songjae.spring.ex.database;
+package com.songjae.spring.ex.database.controller;
 
 import java.util.List;
 
