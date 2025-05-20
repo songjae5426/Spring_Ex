@@ -1,14 +1,28 @@
 package com.songjae.spring.ex.database;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.songjae.spring.ex.database.domain.UsedGoods;
+import com.songjae.spring.ex.database.service.UsedGoodsService;
 
 // request, response 처리 기능
 @Controller
 public class UsedGoodsController {
+	
+	@Autowired
+	private UsedGoodsService usedGoodsService;
+	
 	// 중고 게시글 모든 정보를 response에 담는 페이지
 	@RequestMapping("/db/usedgoods/list")
-	public userdGoodsList(){
+	@ResponseBody
+	public List<UsedGoods> userdGoodsList(){	// json으로 응답
 		// 중고 게시글 정보 얻어 오기
+		List<UsedGoods> usedGoodList = usedGoodsService.getUserdGoodsList();
+		return usedGoodList;
 	}
 }
