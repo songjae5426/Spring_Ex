@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 해당 xml에서 사용할 태그 규칙 지정 dtd
+	mybatis 태그 규칙을 적용하기 위해 mtbatis에서 제공하는 dtd -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!--  mapper 연결 -->
+ <mapper namespace="com.songjae.spring.ex.mybatis.repository.ReviewRepository">
+ 	<select id="selectReivew" resultType="com.songjae.spring.ex.mybatis.domain.Review">
+ 		SELECT 
+ 			 `id`
+ 			, `storeId`
+ 			, `menu`
+ 			, `userName`
+ 			, `point`
+ 			, `review`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`new_review`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
+ 
+ </mapper>
