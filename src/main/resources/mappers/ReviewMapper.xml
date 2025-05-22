@@ -21,5 +21,49 @@
  		WHERE
  			`id` = #{id}
  	</select>
+ 	
+ 	<!-- 업데이트된 행의 갯수를 int로 반환하지만 생략 가능하다 -->
+ 	<!--<insert id="insertRevice" parameterType="map">
+ 		INSERT INTO
+ 			`new_review`
+ 		(
+ 			 `storeId`
+ 			, `menu`
+ 			, `userName`
+ 			, `point`
+ 			, `review`
+ 		)
+ 		VALUES
+ 		(
+ 			#{storeId}
+ 			,#{menu}
+ 			,#{userName}
+ 			,#{point}
+ 			,#{review}
+ 			
+ 		)
+ 	</insert>  -->
+ 	
+ 	<insert id="insertRevice" parameterType="com.songjae.spring.ex.mybatis.domain.Review">
+ 		INSERT INTO
+ 			`new_review`
+ 		(
+ 			 `storeId`
+ 			, `menu`
+ 			, `userName`
+ 			, `point`
+ 			, `review`
+ 		)
+ 		VALUES
+ 		(
+ 		<!-- 맴버 변수 이름 -->
+ 			#{storeId}
+ 			,#{menu}
+ 			,#{userName}
+ 			,#{point}
+ 			,#{review}
+ 			
+ 		)
+ 	</insert>
  
  </mapper>

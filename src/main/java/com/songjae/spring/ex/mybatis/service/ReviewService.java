@@ -16,4 +16,17 @@ public class ReviewService {
 		// new_Review테이블에서 전달받은 id가 일치하는 행 조회
 		return reviewRepository.selectReivew(id);
 	}
+	
+	// sellerId, 메뉴, 작성자, 별점, 리뷰 저장기능
+//	public int setReview(int storeId,
+//			String menu,
+//			String userName,
+//			double point,
+//			String review) {
+//		return reviewRepository.insertRevice(storeId, menu, userName, point, review);
+//	}
+	public int setReview(Review review) {
+		return reviewRepository.insertRevice(review);
+	}
+
 }
