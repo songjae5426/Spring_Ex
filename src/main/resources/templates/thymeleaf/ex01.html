@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf 변수 와 조건</title>
+</head>
+<body>
+	<h2>Thymeleaf 변수 와 조건</h2>
+	<!--  thymeleaf속성은 최종 결과 html에 포함되지 않는다 -->
+	<h3>1. 변수</h3>
+	<div th:with="number = 100">	<!-- 변수 선언 --> 
+		<h4 th:text="${number}"></h4>	<!-- 변수 사용 --> 
+		
+	</div>
+	<!-- 변수가 선언된 하위 태그에서만 사용 가능 밑에는 스코프를 벗어났기 때문에 변수 사용 불가 -->
+	<h4 th:text="${number}"></h4>
+	
+	<h3>2. 태그 없이 thymleaf활용</h3>
+	<!-- 변수를 선언하고싶은데 마땅한 상위 태그가 없을때 -->
+	<!-- block태그는 최종 결과 html에 포함되지 않는다
+		block태그는 렌더링 되지 앟는다 -->
+	<th:block th:with="number1 = 200, number2 = 300">
+		<h4 th:text="${number1}"></h4>
+		<h4 th:text="${number1 + number2}"></h4>	<!-- 간단한 연산도 가능 -->
+		<!-- 결과 : 500 --> <!-- 연산결과 앞에 문자열 붙이기 -->
+		<h4 th:text="'결과: ' + ${number1 + number2}"></h4>	<!-- 1문자열 연산 -->
+		<h4 th:text="|결과 : ${number1 + number2}|"></h4>	<!-- 2||로 감싸기 -->
+	</th:block>
+	
+	<h3>3. 태그 나타내기</h3> 
+	<div th:text="'<b>진한글씨</b>'"></div> <!-- html escape => 태그를 브라우저에 그대로 보여준다 -->
+	<div th:utext="'<b>진한글씨</b>'"></div> <!-- 태그기능대로 출력 될수있으면 안쓰기 해킹 -->
+	
+	
+	<h3>4. 조건문</h3>
+	<th:block th:with="age = 18">
+		<!-- th:if 속성은 값이 true일떄 해당 태그가 포함(랜더링) 된다  -->
+		<!-- 15보다 크면 태그 보여주기 -->
+		<h4 th:if="${age >= 15}">15살 여성입니다</h4>
+		
+		<h4 th:if="${age >= 20}">성인 입니다</h4>	<!-- 출력안됨 -->
+		
+		<!-- th:unless 속성의 값이 false일때 참이돈다 => 랜더링 된다(부정) -->
+		<h4 th:unless="${age >= 20}">미성년 입니다</h4>
+	</th:block>
+	
+	<h3>5. switch 문</h3>
+	<th:block th:with="season = 'ㅇㅇ'">
+		<!-- 봄일때는 따듰하다, 여름일때는 덥다, 가을일때는 시원하다, 겨울일때는 춥다 -->
+		<div th:switch="${season}">
+			<h4 th:case="봄">따뜻하다</h4>
+			<h4 th:case="여름">덥다</h4>
+			<h4 th:case="가을">시원하다</h4>
+			<h4 th:case="겨울">춥다</h4>
+			<h4 th:case="*">계절이 아닙니다</h4>	<!-- defalut -->
+		</div>
+		
+		
+	</th:block>
+</body>
+</html>

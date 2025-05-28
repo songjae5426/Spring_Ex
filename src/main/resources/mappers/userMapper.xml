@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.songjae.spring.ex.mvc.repository.UserRepository">
+ 	<select id="selectLastUser" resultType="com.songjae.spring.ex.mvc.domain.User">
+ 		SELECT * FROM `new_user` ORDER BY `id` DESC LIMIT 1;
+ 	</select>
+ 	
+ 	<!-- useGeneratedKeys="true" keyProperty="id" => insert한후 insert한 행의 id값을 User엔터티객체의 id필드에 저장해주는 설정 -->
+ 	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id"
+ 	parameterType="com.songjae.spring.ex.mvc.domain.User">
+ 		INSERT INTO `new_user`
+ 		( `name`
+ 		, `yyyymmdd`
+ 		, `email`
+ 		, `introduce`)
+ 		VALUE
+ 		(
+ 			  #{name}
+ 			, #{yyyymmdd}
+ 			, #{email}
+ 			, #{introduce}
+ 		)
+ 	</insert>
+ </mapper>

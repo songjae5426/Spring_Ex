@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>thymeleaf 반복문</title>
+</head>
+<body>
+	<h2>반복문</h2>
+	
+	<h3>1. 숫자 반복</h3>
+	<!-- 0 1 2 3 4 -->
+	<div th:each="i:${#numbers.sequence(0, 4)}" th:text="${i}"></div>
+	
+	<h3>문자열 리스트</h3>
+	<!-- for(String fruit : fruitList) 자바에서의 향상된 for문과 같은 반복문 -->
+	<!-- 첫번째 변수는 요소의 값, 두번쨰 변수는 index(해당 요소의 인덱스), count(해당요소의 번호1부터 시작), size(리스트의 길이), current(해당 요소의 값)가 담긴 객체 : 반복할리스트 -->
+	<!-- 두번째 변수명은 일반적으로 status로한다  -->
+	<!-- 첫번째 변수만 사용해도됨 -->
+	<div th:each="fruit, status: ${fruitList}">
+		<span th:text="${fruit}"></span>
+		<!-- th:text속성안에 값이 두개 이상이면 ||로 묶던가 문자열연산으로 이어줘야한다(+) -->
+		<span th:text="|${status.index} ${status.count}|"></span>
+	</div>
+	
+	<h3>3. 맵리스트</h3>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>이름</th>
+				<th>나이</th>
+				<th>취미</th>
+			</tr>
+		</thead>
+		<tbody th:each="user : ${userList}">
+			<tr>
+			<!-- (map명.필드이름)으로 map의 값을 꺼내오지만 user는 자바map객체이기때문에 내부적으로는 map명.get()로 꺼내준다 -->
+				<td th:text="${user.name}">유재석</td>
+				<td th:text="${user.age}">43</td>
+				<td th:text="${user.hobby}">진행하기</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- 값을 다룰때는 ${} -->
+	
+</body>
+</html>

@@ -1,0 +1,76 @@
+package com.songjae.spring.ex.thymeleaf;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.songjae.spring.ex.database.controller.UsedGoodsController;
+
+
+@Controller
+@RequestMapping("/thymeleaf/")
+public class ThymeleafController {
+
+    private final UsedGoodsController usedGoodsController;
+
+    ThymeleafController(UsedGoodsController usedGoodsController) {
+        this.usedGoodsController = usedGoodsController;
+    }
+	@GetMapping("/ex01")
+	public String ex01() {
+		return "thymeleaf/ex01";
+	}
+	
+	@GetMapping("/ex02")
+	public String ex02(Model model) {
+		// 과일 이름 리스트
+		List<String> fruitList = new ArrayList<>();
+		fruitList.add("사과");
+		fruitList.add("귤");
+		fruitList.add("딸기");
+		model.addAttribute("fruitList", fruitList);
+		
+		List<Map<String, Object>> userList = new ArrayList<>();
+		// 이름, 나이, 취미
+		// "name":"김인규", "age":29, "hobby":"독서"
+		Map<String, Object> userMap = new HashMap();
+		userMap.put("name", "김인규");
+		userMap.put("age", 29);
+		userMap.put("hobby", "독서");
+		userList.add(userMap);
+		
+		userMap = new HashMap<>();
+		userMap.put("name", "바다");
+		userMap.put("age", 6);
+		userMap.put("hobby", "사냥하기");
+		userList.add(userMap);
+		 
+		model.addAttribute("userList", userList);
+		return "thymeleaf/ex02";
+	}
+	
+	@GetMapping("/ex03")
+	public String ex03(Model model) {
+		
+		Date date = new Date();
+		
+		LocalDate localDate = LocalDate.now();	// LocalDate객체의 static now()메소드를 사용하면 현재 날짜를 가진 LocalDate객체를 반환해준다
+		
+		LocalDateTime localDateTime = LocalDateTime.now();
+		
+		model.addAttribute("date", date);
+		model.addAttribute("localDate", localDate);
+		model.addAttribute("localDateTime", localDateTime);
+		
+		return "thymeleaf/ex03";
+	}
+}
