@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<h2>AJAX 테스트</h2>
+	
+	<label>이름</label><input type="text" id="nameInput">
+	<label>생년월일</label><input type="text" id="birthdayInput">
+	<button type="button" id="inputBtn">입력</button>
+	
+	<!-- 입력한 이름과 생년월일을 서버에서 전달해서 이름과 나이를 얻어와 새로고침 없이 표시한다 -->
+	<div>이름 : <span id="nameSpan"></span></div>
+	<div>나이 : <span id="ageSpan"></span></div>
+	
+	<script>
+		$("#inputBtn").on("click", function(){
+			let name = $("#nameInput").val();
+			let birthday = $("#birthdayInput").val();
+			
+			$.ajax({
+				type:"get"
+				, url:"/ajax/person"
+				, data:{"name": name, "birthday": birthday}
+				, success:function(response){	
+					// 응답이 정상적으로 전달되었을떄 수행할 기능
+					// 해당함수의 파라미터로 reponseBody에 담겨있는 데이터가 들어온다
+					// json 문자열
+					// {"name":"김인규", "age":32}
+					// 제이쿼리의 ajax는 response에 담긴 json문자열을 javascript에서 손쉽게 사용하도록 
+					// json문자열을 javascript객체로 변환해준다
+					$("#nameSpan").text(response.name);
+					$("#ageSpan").text(response.age);
+					
+					
+				}
+			});
+		});
+	</script>
+</body>
+</html>
